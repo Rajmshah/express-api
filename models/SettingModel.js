@@ -5,7 +5,7 @@ export default {
      * @returns {number} that number, plus one.
      */
     search(data, callback) {
-        Student.find().exec(callback)
+        Setting.find().exec(callback)
     },
     getOne(data, callback) {
         Setting.findOne({

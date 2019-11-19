@@ -12,7 +12,7 @@ var schema = new Schema(
         mobile: {
             type: Number
         },
-        Age: {
+        age: {
             type: Number
         },
         keyRole: {
