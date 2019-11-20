@@ -1,3 +1,5 @@
+import { Schema } from "mongoose"
+
 var schema = new Schema(
     {
         name: { type: String, unique: true },
@@ -9,6 +11,10 @@ var schema = new Schema(
         },
         description: {
             type: String
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
         }
     },
     {
