@@ -39,6 +39,13 @@ export default {
             _id: data.id
         }).exec(callback)
     },
+    getOneByToken(data, callback) {
+        User.findOne({
+            "accessToken.token": {
+                $in: data.token
+            }
+        }).exec(callback)
+    },
     createUser(data, callback) {
         const user = new User(data)
         user.save(callback)
@@ -56,7 +63,7 @@ export default {
         }
         User.updateOne({ _id: param.id }, { $set: data2 }).exec(callback)
     },
-    login(data, callback) {
+    login: (data, callback) => {
         const uuid = require("uuidv4").default
         async.waterfall(
             [
@@ -65,21 +72,26 @@ export default {
                         username: data.username,
                         password: data.password
                     }).exec(function(err, data2) {
+                        console.log(err, data2)
                         if (err) {
                             callback(err)
-                        } else if (_.isEmpty(data2)) {
-                            callback("No Data Found", null)
-                        } else {
+                        } else if (!_.isEmpty(data2)) {
                             callback(null, data2)
+                        } else {
+                            callback(403)
                         }
                     })
                 },
                 function(user, callback) {
-                    user.accessToken.push({
-                        token: uuid(),
-                        expiry: moment().add(1, "M")
-                    })
-                    user.save(callback)
+                    if (_.isEmpty(user)) {
+                        callback(403)
+                    } else {
+                        user.accessToken.push({
+                            token: uuid(),
+                            expiry: moment().add(1, "M")
+                        })
+                        user.save(callback)
+                    }
                 }
             ],
             callback

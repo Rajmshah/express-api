@@ -20,6 +20,9 @@ router.get(
         TeamModel.getOne(req.params, res.callback)
     }
 )
+router.get("/getOneByUser/:user", (req, res) => {
+    TeamModel.getOneByUser(req.params, res.callback)
+})
 router.post("/saveTeam", (req, res) => {
     TeamModel.createTeam(req.body, res.callback)
 })

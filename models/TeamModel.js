@@ -39,6 +39,11 @@ export default {
             _id: data.id
         }).exec(callback)
     },
+    getOneByUser(data, callback) {
+        Team.findOne({
+            user: data.user
+        }).exec(callback)
+    },
     createTeam(data, callback) {
         const team = new Team(data)
         team.save(callback)
@@ -54,6 +59,10 @@ export default {
         if (data2._id) {
             delete data2._id
         }
-        Team.updateOne({ _id: param.id }, { $set: data2 }).exec(callback)
+        Team.updateOne(
+            { _id: param.id },
+            { $set: data2 },
+            { upsert: true }
+        ).exec(callback)
     }
 }

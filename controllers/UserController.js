@@ -19,6 +19,9 @@ router.get(
         UserModel.getOne(req.params, res.callback)
     }
 )
+router.get("/getOneByToken/:token", (req, res) => {
+    UserModel.getOneByToken(req.params, res.callback)
+})
 router.post("/saveUser", (req, res) => {
     UserModel.createUser(req.body, res.callback)
 })
@@ -29,6 +32,7 @@ router.delete("/deleteUser/:id", (req, res) => {
     UserModel.delete(req.params, res.callback)
 })
 router.post("/login", (req, res) => {
+    console.log("Enter login")
     UserModel.login(req.body, res.callback)
 })
 
