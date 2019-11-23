@@ -12,6 +12,7 @@
         "serve": "docker run -p 3000:3000 wohlig/wohlig-framework:latest"
     },
     "dependencies": {
+        "async": "^3.1.0",
         "fs-extra": "^8.1.0",
         "json2xls": "^0.1.2",
         "moment": "^2.24.0",
