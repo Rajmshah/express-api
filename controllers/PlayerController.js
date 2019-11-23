@@ -29,5 +29,8 @@ router.put("/updatePlayer/:id", (req, res) => {
 router.delete("/deletePlayer/:id", (req, res) => {
     PlayerModel.delete(req.params, res.callback)
 })
+router.post("/generateExcel", (req, res) => {
+    PlayerModel.generateExcel(req.body, res)
+})
 
 export default router

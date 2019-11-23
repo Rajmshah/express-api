@@ -1,3 +1,5 @@
+import SettingModel from "./SettingModel"
+
 export default {
     /**
      * This function adds one to its input.
@@ -43,5 +45,46 @@ export default {
             data2.fullName = data2.firstName + " " + data2.surname
         }
         Player.updateOne({ _id: param.id }, { $set: data2 }).exec(callback)
+    },
+    generateExcel: (data, res) => {
+        Player.find()
+            .populate("team")
+            .lean()
+            .exec(function(err, playerDetail) {
+                if (err) res.callback(err)
+                if (_.isEmpty(playerDetail)) res.callback(null, [])
+                var excelData = []
+                async.each(
+                    playerDetail,
+                    function(player, callback) {
+                        var obj = {}
+                        obj["TEAM NAME"] = player.team.name
+                        obj["VILLAGE"] = player.team.village
+                        obj["PLAYER NAME"] = player.fullName
+                        obj.AGE = player.age
+                        obj.ROLE = player.keyRole
+                        obj["BATTING TYPE"] = player.battingType
+                        obj["BOWLING TYPE"] = player.bowlingType
+                        if (player.isWicketkeeper) {
+                            obj["WICKETKEEPER"] = "Yes"
+                        } else {
+                            obj["WICKETKEEPER"] = "No"
+                        }
+                        obj.EMAIL = player.email
+                        obj.MOBILE = player.mobile
+                        if (player.photograph) {
+                            obj.PHOTOGRAPH = "Yes"
+                        } else {
+                            obj.PHOTOGRAPH = "No"
+                        }
+                        excelData.push(obj)
+                        callback()
+                    },
+                    function(err) {
+                        if (err) res.callback(err)
+                        SettingModel.generateExcel("Team", excelData, res)
+                    }
+                )
+            })
     }
 }

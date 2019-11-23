@@ -1,3 +1,5 @@
+import SettingModel from "./SettingModel"
+
 export default {
     /**
      * This function adds one to its input.
@@ -72,7 +74,6 @@ export default {
                         username: data.username,
                         password: data.password
                     }).exec(function(err, data2) {
-                        console.log(err, data2)
                         if (err) {
                             callback(err)
                         } else if (!_.isEmpty(data2)) {
@@ -96,5 +97,38 @@ export default {
             ],
             callback
         )
+    },
+    generateExcel: (data, res) => {
+        User.find()
+            .lean()
+            .exec(function(err, userDetail) {
+                if (err) res.callback(err)
+                if (_.isEmpty(userDetail)) res.callback(null, [])
+                var excelData = []
+                async.each(
+                    userDetail,
+                    function(user, callback) {
+                        var obj = {}
+                        obj.USERNAME = user.username
+                        obj.PASSWORD = user.password
+                        if (user.email) {
+                            obj.EMAIL = user.email
+                        } else {
+                            obj.EMAIL = ""
+                        }
+                        if (user.mobile) {
+                            obj.MOBILE = user.mobile
+                        } else {
+                            obj.MOBILE = ""
+                        }
+                        excelData.push(obj)
+                        callback()
+                    },
+                    function(err) {
+                        if (err) res.callback(err)
+                        SettingModel.generateExcel("User", excelData, res)
+                    }
+                )
+            })
     }
 }

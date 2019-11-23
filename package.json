@@ -12,14 +12,12 @@
         "serve": "docker run -p 3000:3000 wohlig/wohlig-framework:latest"
     },
     "dependencies": {
-        "deep-populate": "^1.0.0",
         "fs-extra": "^8.1.0",
         "json2xls": "^0.1.2",
         "moment": "^2.24.0",
-        "mongoose-deep-populate": "^3.1.1",
         "populate": "^5.0.1",
         "uuidv4": "^5.0.0",
-        "wohlig-framework-core": "^0.1.2"
+        "wohlig-framework-core": "latest"
     },
     "devDependencies": {
         "@babel/core": "^7.1.2",

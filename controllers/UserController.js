@@ -32,8 +32,10 @@ router.delete("/deleteUser/:id", (req, res) => {
     UserModel.delete(req.params, res.callback)
 })
 router.post("/login", (req, res) => {
-    console.log("Enter login")
     UserModel.login(req.body, res.callback)
+})
+router.post("/generateExcel", (req, res) => {
+    UserModel.generateExcel(req.body, res)
 })
 
 export default router
