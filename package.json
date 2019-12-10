@@ -16,6 +16,7 @@
         "fs-extra": "^8.1.0",
         "json2xls": "^0.1.2",
         "moment": "^2.24.0",
+        "mongo-cursor-pagination": "^7.1.0",
         "populate": "^5.0.1",
         "uuidv4": "^5.0.0",
         "wohlig-framework-core": "latest"
