@@ -2,6 +2,12 @@ const router = Router()
 router.get("/", (req, res) => {
     SponsorModel.search(req.query, res.callback)
 })
+router.get("/getList", (req, res) => {
+    SponsorModel.getList(req.query, res.callback)
+})
+router.get("/getAll", (req, res) => {
+    SponsorModel.getAll(req.query, res.callback)
+})
 router.get(
     "/getOne/:id",
     ValidateRequest({

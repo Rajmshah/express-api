@@ -34,6 +34,9 @@ export default {
             callback
         )
     },
+    getAll(data, callback) {
+        Team.find().exec(callback)
+    },
     getOne(data, callback) {
         Team.findOne({
             _id: data.id

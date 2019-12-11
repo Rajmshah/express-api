@@ -44,6 +44,45 @@ export default {
             callback
         )
     },
+    getList(data, callback) {
+        async.parallel(
+            {
+                sponsorBigList: function(callback) {
+                    Sponsor.find({ active: true, typeSponsor: "Big" })
+                        .sort({ order: 1 })
+                        .exec(callback)
+                },
+                sponsorMediumList: function(callback) {
+                    Sponsor.find({ active: true, typeSponsor: "Medium" })
+                        .sort({ order: 1 })
+                        .exec(callback)
+                },
+                sponsorSmallList: function(callback) {
+                    Sponsor.find({ active: true, typeSponsor: "Small" })
+                        .sort({ order: 1 })
+                        .exec(callback)
+                }
+            },
+            callback
+        )
+        // Sponsor.find({ active: true })
+        //     .sort({ typeSponsor: 1 })
+        //     .exec(function(err, sponsors) {
+        //         if (err) callback(err)
+        //         if (_.isEmpty(sponsors)) callback(null, {})
+        //         if (sponsors) {
+        //             var obj = {}
+        //             obj.sponsorBigList = _.filter(sponsors)
+        //             obj.sponsorMediumList
+        //             obj.sponsorSmallList
+        //         }
+        //     })
+    },
+    getAll(data, callback) {
+        Sponsor.find({ active: true })
+            .sort({ order: 1 })
+            .exec(callback)
+    },
     getOne(data, callback) {
         Sponsor.findOne({
             _id: data.id
