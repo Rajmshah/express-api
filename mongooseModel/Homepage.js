@@ -4,10 +4,7 @@ var schema = new Schema(
             {
                 image: String,
                 title: String,
-                linkType: {
-                    type: String,
-                    enum: ["Internal", "External"]
-                },
+                linkType: String,
                 link: String,
                 status: Boolean
             }
@@ -16,10 +13,7 @@ var schema = new Schema(
             {
                 image: String,
                 title: String,
-                linkType: {
-                    type: String,
-                    enum: ["Internal", "External"]
-                },
+                linkType: String,
                 link: String,
                 status: Boolean
             }
