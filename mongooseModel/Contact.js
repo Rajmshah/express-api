@@ -10,7 +10,12 @@ var schema = new Schema(
             }
         ],
         email: [String],
-        social: [String]
+        social: [
+            {
+                title: String,
+                link: String
+            }
+        ]
     },
     {
         timestamps: true

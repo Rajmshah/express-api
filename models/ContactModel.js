@@ -31,17 +31,17 @@ export default {
                         }
                         email.push(obj)
                     })
-                    var social = []
-                    _.forEach(contactDetail.social, function(n, key) {
-                        var obj = {}
-                        obj = {
-                            name: n,
-                            code: n.substring(0, 2) + key
-                        }
-                        social.push(obj)
-                    })
+                    // var social = []
+                    // _.forEach(contactDetail.social, function(n, key) {
+                    //     var obj = {}
+                    //     obj = {
+                    //         name: n,
+                    //         code: n.substring(0, 2) + key
+                    //     }
+                    //     social.push(obj)
+                    // })
+                    // contactDetail.social = social
                     contactDetail.email = email
-                    contactDetail.social = social
                     callback(null, contactDetail)
                 }
             })
