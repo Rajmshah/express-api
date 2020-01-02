@@ -58,8 +58,13 @@ export default {
                     playerDetail,
                     function(player, callback) {
                         var obj = {}
-                        obj["TEAM NAME"] = player.team.name
-                        obj["VILLAGE"] = player.team.village
+                        if(player.team){
+                            obj["TEAM NAME"] = player.team.name
+                            obj["VILLAGE"] = player.team.village
+                        } else {
+                            obj["TEAM NAME"] = ""
+                            obj["VILLAGE"] = ""
+                        }
                         obj["PLAYER NAME"] = player.fullName
                         obj.AGE = player.age
                         obj.ROLE = player.keyRole
